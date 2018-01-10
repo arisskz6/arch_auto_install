@@ -16,7 +16,7 @@ function error_abort {
 #set time sync
 timedatectl set-ntp true; error_abort
 # make partion table
-parted /dev/sda mklabel msdos mkpart primary ext4 start 0 end 20G; error_abort
+parted /dev/sda mklabel msdos mkpart primary ext4 0% 20G; error_abort
 # format the partion
 mkfs.ext4 /dev/sda1; error_abort
 

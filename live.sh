@@ -16,7 +16,7 @@ function error_abort {
 #set time sync
 timedatectl set-ntp true; error_abort
 # make partion table
-parted /dev/sda mklabel msdos mkpart primary ext4 0% 20G; error_abort
+parted -s /dev/sda mklabel msdos mkpart primary ext4 0% 20G; error_abort
 # format the partion
 mkfs.ext4 /dev/sda1; error_abort
 
@@ -26,7 +26,7 @@ mount /dev/sda1 /mnt; error_abort
 sed -i 's/^Server/#Server/g' /etc/pacman.d/mirrorlist
 echo 'Server = http://mirrors.163.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
 pacman -Syy; error_abort
-pacstrap -i /mnt base base-devel net-tools vim --nocomfirm; error_abort
+pacstrap -i /mnt base base-devel net-tools vim --noconfirm; error_abort
 genfstab -U -p /mnt >> /mnt/etc/fstab; error_abort
 
 chmod +x ./chroot.sh; error_abort

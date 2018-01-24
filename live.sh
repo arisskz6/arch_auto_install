@@ -16,12 +16,12 @@ function error_abort {
 #set time sync
 timedatectl set-ntp true; error_abort
 # make partion table
-parted -s /dev/sda mklabel msdos mkpart primary ext4 0% 20G; error_abort
+#parted -s /dev/sda mklabel msdos mkpart primary ext4 0% 20G; error_abort
 # format the partion
-mkfs.ext4 /dev/sda1; error_abort
+#mkfs.ext4 /dev/sda1; error_abort
 
 # mount the root partion to mnt
-mount /dev/sda1 /mnt; error_abort
+#mount /dev/sda1 /mnt; error_abort
 
 sed -i 's/^Server/#Server/g' /etc/pacman.d/mirrorlist
 echo 'Server = http://mirrors.163.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist

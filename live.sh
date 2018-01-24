@@ -35,6 +35,8 @@ arch-chroot /mnt ./chroot.sh; error_abort
 umount -R /mnt; error_abort
 echo
 echo "---------------------------------------"
-echo "Install Finished!Enter reboot to exit"
+echo "Install Finished!Enter rebooting"
 echo "---------------------------------------"
 echo
+sleep 5
+reboot

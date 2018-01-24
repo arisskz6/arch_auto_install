@@ -26,7 +26,7 @@ echo "arch" > /etc/hostname; error_abort
 echo "127.0.0.1		localhost.localdomain	arch" > /etc/hosts
 
 # Install important drivers and applications
-pacman -S xorg xorg-server xorg-xinit xorg-utils mesa xorg-twm
+pacman -S xorg xorg-server xorg-xinit xorg-utils mesa xorg-twm --noconfirm
 pacman -S mesa xf86-video-intel alsa-utils xf86-input-synaptics --noconfirm; error_abort
 pacman -S plasma-desktop  --noconfirm;error_abort
 pacman -S sddm konsole ark dolphin okular --noconfirm

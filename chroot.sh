@@ -36,9 +36,9 @@ pacman -S networkmanager --noconfirm
 systemctl enable NetworkManager.service
 #set yaourt soure
 cat >> /etc/pacman.conf << EOF
-[archlinuxcn]
-SigLevel = Optional TrustedOnly
-Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+ [archlinuxcn]
+ SigLevel = Optional TrustedOnly
+ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 EOF
 pacman -Syy --noconfirm && pacman -S archlinuxcn-keyring --noconfirm
 pacman -S yaourt --noconfirm

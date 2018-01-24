@@ -26,17 +26,13 @@ echo "arch" > /etc/hostname; error_abort
 echo "127.0.0.1		localhost.localdomain	arch" > /etc/hosts
 
 # Install important drivers and applications
+pacman -S xorg xorg-server xorg-xinit xorg-utils mesa xorg-twm
 pacman -S mesa xf86-video-intel alsa-utils xf86-input-synaptics --noconfirm; error_abort
-pacman -S deepin deepin-extra --noconfirm; error_abort
-
-#set deepin-greeter replace the default greeter of lightdm
-snum=$(grep -n '^\[Seat:' /etc/lightdm/lightdm.conf | sed 's/:.*$//g')
-sed -i "$snum a greeter-session=lightdm-deepin-greeter" /etc/lightdm/lightdm.conf
-systemctl enable lightdm.service
-
-pacman -S file-roller gedit  evince cheese  gpicview openssh unrar unzip p7zip gparted wqy-zenhei firefox wiznote gparted ntfs-3g gvfs  ttf-dejavu --noconfirm
-pacman -S networkmanager --noconfirm;
-systemctl start NetworkManager.service
+pacman -S plasma-desktop  --noconfirm;error_abort
+pacman -S sddm konsole ark dolphin okular --noconfirm
+systemctl enable sddm
+pacman -S file-roller gedit gpicview openssh unrar unzip p7zip wqy-zenhei firefox  ntfs-3g gvfs  ttf-dejavu --noconfirm
+pacman -S networkmanager --noconfirm
 systemctl enable NetworkManager.service
 #set yaourt soure
 cat >> /etc/pacman.conf << EOF
@@ -56,13 +52,25 @@ EOF
 
 mkinitcpio -p linux; error_abort
 pacman -S linux-headers broadcom-wl-dkms --noconfirm 
-echo root:0322Arch233 | chpasswd; error_abort
+echo root:0322Qds233 | chpasswd; error_abort
 
 useradd -m -g users -G wheel -s /bin/bash arisskz6
 echo arisskz6:0322qds | chpasswd
 sed -i 's/# %wheel ALL=(ALL) ALL/  %wheel ALL=(ALL) ALL/g' /etc/sudoers
 
-# Install grub boot loader
-grub-install --target=i386-pc /dev/sda; error_abort
-grub-mkconfig -o /boot/grub/grub.cfg; error_abort
+# Install boot loader
 
+bootctl install; error_abort
+cat > /boot/loader/entries/arch.conf << EOF
+title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options root=/dev/sda2 rw
+EOF
+error_abort
+rm -r /boot/loader/loader.conf
+cat > /boot/loader/loader.conf << EOF
+timeout 3
+default arch
+EOF
+error_abort

@@ -26,12 +26,17 @@ echo "arch" > /etc/hostname; error_abort
 echo "127.0.0.1		localhost.localdomain	arch" > /etc/hosts
 
 # Install important drivers and applications
-pacman -S xorg xorg-server xorg-xinit xorg-utils mesa xorg-twm --noconfirm
+pacman -S xorg-server xorg-xinit --noconfirm; error_abort
+
 pacman -S mesa xf86-video-intel alsa-utils xf86-input-synaptics --noconfirm; error_abort
-pacman -S plasma-desktop  --noconfirm;error_abort
-pacman -S sddm konsole ark dolphin okular --noconfirm
-systemctl enable sddm
-pacman -S file-roller gedit gpicview openssh unrar unzip p7zip wqy-zenhei firefox  ntfs-3g gvfs  ttf-dejavu --noconfirm
+pacman -S deepin deepin-extra lightdm-deepin-greeter --noconfirm; error_abort
+#set deepin-greeter replace the default greeter of lightdm
+snum=$(grep -n '^\[Seat:' /etc/lightdm/lightdm.conf | sed 's/:.*$//g')
+sed -i "$snum a greeter-session=lightdm-deepin-greeter" /etc/lightdm/lightdm.conf
+#enable lightdm service
+systemctl enable lightdm.service
+
+pacman -S file-roller openssh unrar unzip p7zip wqy-zenhei firefox  ntfs-3g gvfs  ttf-dejavu --noconfirm
 pacman -S networkmanager --noconfirm
 systemctl enable NetworkManager.service
 #set yaourt soure

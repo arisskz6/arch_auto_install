@@ -50,7 +50,9 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 EOF
 
-mkinitcpio -p linux; error_abort
+pacman -S linux-lts --noconfirm; error_abort
+pacman -R linux --noconfirm
+mkinitcpio -p linux-lts; error_abort
 pacman -S linux-lts-headers broadcom-wl-dkms --noconfirm 
 echo root:0322Qds233 | chpasswd; error_abort
 
@@ -63,8 +65,8 @@ sed -i 's/# %wheel ALL=(ALL) ALL/  %wheel ALL=(ALL) ALL/g' /etc/sudoers
 bootctl install; error_abort
 cat > /boot/loader/entries/arch.conf << EOF
 title Arch Linux
-linux /vmlinuz-linux
-initrd /initramfs-linux.img
+linux /vmlinuz-linux-lts
+initrd /initramfs-linux-lts.img
 options root=/dev/sda2 rw
 EOF
 error_abort

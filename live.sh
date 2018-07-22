@@ -133,6 +133,7 @@ prepare(){
     done
 }
 
+prepare
 #set time sync
 timedatectl set-ntp true; error_abort
 # make partion table

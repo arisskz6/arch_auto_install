@@ -25,6 +25,8 @@ error_abort
 echo "arch" > /etc/hostname; error_abort
 echo "127.0.0.1		localhost.localdomain	arch" > /etc/hosts
 
+# Install  developement tool
+pacman -S git curl wget --noconfirm
 # Install important drivers and applications
 pacman -S xorg-server xorg-xinit --noconfirm; error_abort
 

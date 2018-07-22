@@ -151,7 +151,7 @@ genfstab -U -p /mnt >> /mnt/etc/fstab; error_abort
 
 chmod +x ./chroot.sh; error_abort
 cp ./chroot.sh /mnt; error_abort
-arch-chroot /mnt ./chroot.sh; error_abort
+arch-chroot /mnt ./chroot.sh $ROOT; error_abort
 umount -R /mnt; error_abort
 echo
 echo "---------------------------------------"

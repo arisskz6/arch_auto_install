@@ -35,7 +35,7 @@ pacman -S file-roller gedit gpicview openssh unrar unzip p7zip wqy-zenhei firefo
 pacman -S networkmanager --noconfirm
 systemctl enable NetworkManager.service
 #set yaourt soure
-cat >> /etc/pacman.conf << EOF
+cat >> /etc/pacman.conf << "EOF"
  [archlinuxcn]
  SigLevel = Optional TrustedOnly
  Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
@@ -51,7 +51,7 @@ export XMODIFIERS="@im=fcitx"
 EOF
 
 mkinitcpio -p linux; error_abort
-pacman -S linux-headers broadcom-wl-dkms --noconfirm 
+pacman -S linux-lts-headers broadcom-wl-dkms --noconfirm 
 echo root:0322Qds233 | chpasswd; error_abort
 
 useradd -m -g users -G wheel -s /bin/bash arisskz6

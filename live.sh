@@ -149,6 +149,7 @@ pacman -Syy; error_abort
 pacstrap -i /mnt base base-devel net-tools vim --noconfirm; error_abort
 genfstab -U -p /mnt >> /mnt/etc/fstab; error_abort
 
+wget --no-check-certificate https://raw.githubusercontent.com/arisskz6/arch_auto_install/master/chroot.sh -O chroot.sh
 chmod +x ./chroot.sh; error_abort
 cp ./chroot.sh /mnt; error_abort
 arch-chroot /mnt ./chroot.sh $ROOT; error_abort

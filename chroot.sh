@@ -1,6 +1,6 @@
 #!/bin/bash
 # Finsh the auto_install process in chroot
-
+ROOTUUID=$(blkid $1  | awk '{print $2}')
 function error_abort {
 	if [ "$?" -ne 0 ];then
 		echo "Sorry, the last command failed,aborting..."
@@ -72,7 +72,7 @@ cat > /boot/loader/entries/arch.conf << EOF
 title Arch Linux
 linux /vmlinuz-linux-lts
 initrd /initramfs-linux-lts.img
-options root=/dev/sda2 rw
+options root=$ROOTUUID rw
 EOF
 error_abort
 rm -r /boot/loader/loader.conf

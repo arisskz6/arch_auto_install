@@ -50,7 +50,7 @@ EOF
 pacman -Syy --noconfirm && pacman -S archlinuxcn-keyring --noconfirm
 pacman -S yaourt --noconfirm
 
-pacman -S fcitx fcitx-sougoupinyin --noconfirm
+pacman -S fcitx fcitx-im fcitx-configtool fcitx-sougoupinyin --noconfirm
 cat >> /home/arisskz6/.xinitrc << EOF
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
